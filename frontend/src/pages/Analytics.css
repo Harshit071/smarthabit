@@ -1,0 +1,38 @@
+.analytics h1 {
+  margin-bottom: 2rem;
+  color: #2c3e50;
+}
+
+.habit-selector {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.habit-selector label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.habit-selector select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  min-width: 200px;
+}
+
+.chart-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-section h2 {
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+

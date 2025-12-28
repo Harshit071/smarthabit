@@ -1,0 +1,102 @@
+.goals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.goal-form {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.goal-form input,
+.goal-form textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.goal-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #3498db;
+}
+
+.goal-card.completed {
+  border-left-color: #27ae60;
+}
+
+.goal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.goal-header h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.completed-badge {
+  background-color: #27ae60;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+.goal-description {
+  color: #7f8c8d;
+  margin-bottom: 1rem;
+}
+
+.goal-progress {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  height: 20px;
+  background-color: #ecf0f1;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #3498db;
+  transition: width 0.3s;
+}
+
+.goal-card.completed .progress-fill {
+  background-color: #27ae60;
+}
+
+.progress-text {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+

@@ -1,0 +1,93 @@
+.xp-display {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  color: white;
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+  margin-bottom: 2rem;
+  animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.xp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.level-label {
+  font-size: 0.75rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.level-number {
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.xp-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.xp-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.xp-to-next {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.xp-progress-bar {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.xp-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+  border-radius: 6px;
+  transition: width 0.5s ease-out;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  }
+}
+
