@@ -18,14 +18,18 @@ app = FastAPI(
 
 # CORS middleware - allow all origins in production, specific in dev
 allowed_origins = [
-    settings.FRONTEND_URL,
     "http://localhost:3000",
     "https://localhost:3000",
 ]
 
-# Add production frontend URL if set
-if os.getenv("FRONTEND_URL"):
-    allowed_origins.append(os.getenv("FRONTEND_URL"))
+# Add the deployed frontend URL (both http and https) if available
+if settings.FRONTEND_URL:
+    allowed_origins.append(settings.FRONTEND_URL)
+    if settings.FRONTEND_URL.startswith("http://"):
+        allowed_origins.append(settings.FRONTEND_URL.replace("http://", "https://"))
+    elif settings.FRONTEND_URL.startswith("https://"):
+        allowed_origins.append(settings.FRONTEND_URL.replace("https://", "http://"))
+
 
 app.add_middleware(
     CORSMiddleware,
