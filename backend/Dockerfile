@@ -13,13 +13,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt alembic uvicorn
 
 # Copy application code
-COPY entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 COPY . .
 
 # Expose port
 EXPOSE 8000
 
 # Default command (can be overridden in docker-compose)
-ENTRYPOINT ["/bin/bash", "-c", "./entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
