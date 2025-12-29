@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 
 # Copy requirements and install Python dependencies
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt alembic uvicorn
 
 # Copy application code
 COPY entrypoint.sh .
@@ -21,5 +21,5 @@ COPY . .
 EXPOSE 8000
 
 # Default command (can be overridden in docker-compose)
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint.sh"]
 
