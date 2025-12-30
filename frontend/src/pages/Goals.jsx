@@ -9,6 +9,12 @@ function Goals() {
   const [showForm, setShowForm] = useState(false)
   const [showLinkHabitsModal, setShowLinkHabitsModal] = useState(false) // State for modal visibility
   const [selectedGoalForLinking, setSelectedGoalForLinking] = useState(null) // State to pass goal to modal
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    target_value: '',
+    unit: ''
+  })
 
   const { data: goals, isLoading } = useQuery({
     queryKey: ['goals'],
