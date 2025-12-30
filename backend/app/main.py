@@ -6,9 +6,8 @@ from app.database import Base, engine
 from app.config import settings
 import os
 
-# Create database tables (only in development)
-if os.getenv("ENVIRONMENT", "development") == "development":
-    Base.metadata.create_all(bind=engine)
+# Create database tables (unconditionally on startup for robust deployment on Render)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Smart Habit & Goal Tracker API",
@@ -17,7 +16,27 @@ app = FastAPI(
 )
 
 # CORS middleware - allow all origins in production, specific in dev
-allowed_origins = ["*"] # TEMPORARY: Allow all origins for debugging CORS
+def normalize_url(url: str) -> str:
+    return url.rstrip('/')
+
+allowed_origins = [
+    "http://localhost:3000",
+    "https://localhost:3000",
+]
+
+if settings.FRONTEND_URL:
+    normalized_frontend_url = normalize_url(settings.FRONTEND_URL)
+    allowed_origins.append(normalized_frontend_url)
+    
+    if normalized_frontend_url.startswith("http://"):
+        https_version = normalized_frontend_url.replace("http://", "https://")
+        allowed_origins.append(https_version)
+    elif normalized_frontend_url.startswith("https://"):
+        http_version = normalized_frontend_url.replace("https://", "http://")
+        allowed_origins.append(http_version)
+
+# Ensure uniqueness of origins
+allowed_origins = list(set(allowed_origins))
 
 
 app.add_middleware(
