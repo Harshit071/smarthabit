@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import api from '../services/api'
+import LinkHabitsModal from '../components/LinkHabitsModal' // Import the new modal component
 import './Goals.css'
 
 function Goals() {
   const queryClient = useQueryClient()
   const [showForm, setShowForm] = useState(false)
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    target_value: '',
-    unit: ''
-  })
+  const [showLinkHabitsModal, setShowLinkHabitsModal] = useState(false) // State for modal visibility
+  const [selectedGoalForLinking, setSelectedGoalForLinking] = useState(null) // State to pass goal to modal
 
   const { data: goals, isLoading } = useQuery({
     queryKey: ['goals'],
@@ -94,6 +91,12 @@ function Goals() {
             <div key={goal.id} className={`goal-card ${goal.is_completed ? 'completed' : ''}`}>
               <div className="goal-header">
                 <h3>{goal.name}</h3>
+                <button className="btn-secondary btn-edit-goal" onClick={() => {
+                  setSelectedGoalForLinking(goal)
+                  setShowLinkHabitsModal(true)
+                }}>
+                  Edit
+                </button>
                 {goal.is_completed && <span className="completed-badge">✓ Completed</span>}
               </div>
               <p className="goal-description">{goal.description}</p>
@@ -112,6 +115,14 @@ function Goals() {
           )
         })}
       </div>
+
+      {selectedGoalForLinking && (
+        <LinkHabitsModal
+          show={showLinkHabitsModal}
+          onClose={() => setShowLinkHabitsModal(false)}
+          goal={selectedGoalForLinking}
+        />
+      )}
     </div>
   )
 }
