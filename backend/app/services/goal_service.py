@@ -51,7 +51,7 @@ class GoalService:
         ).first()
     
     @staticmethod
-    def update_goal(db: Session, goal_id: int, user_id: int, goal_data: GoalUpdate) -> Optional[Goal]:
+    def update_goal(db: Session, goal_id: int, user_id: int, goal_data: GoalUpdate, habit_ids: Optional[List[int]] = None) -> Optional[Goal]:
         """Update a goal"""
         goal = GoalService.get_goal(db, goal_id, user_id)
         if not goal:
@@ -60,6 +60,22 @@ class GoalService:
         update_data = goal_data.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(goal, field, value)
+
+        # Handle habit linking/unlinking
+        if habit_ids is not None:
+            # Clear existing habit links for this goal
+            db.query(GoalHabit).filter(GoalHabit.goal_id == goal.id).delete()
+            db.flush() # Flush to ensure deletions are processed before new insertions
+
+            # Create new habit links
+            for habit_id in habit_ids:
+                # You might want to add a check here if the habit_id actually exists and belongs to the user
+                goal_habit = GoalHabit(
+                    goal_id=goal.id,
+                    habit_id=habit_id,
+                    contribution_weight=1.0 # Default weight, can be expanded later
+                )
+                db.add(goal_habit)
         
         db.commit()
         db.refresh(goal)

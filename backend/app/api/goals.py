@@ -52,7 +52,7 @@ async def update_goal(
     db: Session = Depends(get_db)
 ):
     """Update a goal"""
-    goal = GoalService.update_goal(db, goal_id, current_user.id, goal_data)
+    goal = GoalService.update_goal(db, goal_id, current_user.id, goal_data, goal_data.habit_ids)
     if not goal:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Goal not found")
     return goal

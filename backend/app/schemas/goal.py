@@ -21,6 +21,7 @@ class GoalUpdate(BaseModel):
     description: Optional[str] = None
     target_value: Optional[float] = None
     unit: Optional[str] = None
+    habit_ids: Optional[List[int]] = None  # Add this for linking habits
 
 
 class GoalHabitResponse(BaseModel):
